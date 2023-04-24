@@ -5,6 +5,8 @@ import (
 	"context"
 	"encoding/json"
 	"log"
+	"math/rand"
+	"time"
 
 	"github.com/NickGowdy/data-processor/client"
 	"github.com/NickGowdy/data-processor/device"
@@ -50,6 +52,10 @@ func registerDevice(client client.Client, url string) (bool, *device.Device) {
 	if err != nil {
 		log.Print(err)
 	}
+
+	rand.Seed(time.Now().UnixNano())
+	n := rand.Intn(4) // n will be between 0 and 10
+	time.Sleep(time.Duration(n) * time.Second)
 
 	// TODO: call url and handle response
 	// resp, err := client.Post(url, "application/json", b)
